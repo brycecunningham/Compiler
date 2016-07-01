@@ -14,7 +14,7 @@ Then run VMTranslator component on .vm file(s) to get .asm file.
   - compile Parser.java, CodeWriter.java, VMTranslator.java
   - to run: "$ java VMTranslator source" where source is a .vm file or folder containing one or more .vm files
   
-Finally, run Assembler component on .asm file(s) to get output file containing binary machine code
+Finally, run Assembler component on .asm file to get output .hack file containing binary machine code
 
   - compile Code.java, Parser.java, SymbolTable.java, Assembler.java
-  - to run: "$ java Assembler source" where source is a .asm file or folder containing one of more .asm files
+  - to run: "$ java Assembler source" where source is a .asm file
