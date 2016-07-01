@@ -1,7 +1,6 @@
 import java.io.*;
 import java.util.*;
 
-// Project 8 VMTranslator
 
 public class VMTranslator {
 
@@ -12,7 +11,7 @@ public class VMTranslator {
 		File outputfile;
 
 		
-		// source is either a directory of files
+		// source is either a directory of .vm files...
 		if (source.isDirectory()) {
 			for (File f : source.listFiles())
 				if (f.getName().endsWith(".vm")) {
@@ -20,7 +19,7 @@ public class VMTranslator {
 				}
 			outputfile = new File(source + "/" + source.getName() + ".asm");
 		
-		// or a .vm file
+		// ...or one .vm file
 		} else {	
 			inputfiles.add(source);
 			String inputstring = source.getPath();
