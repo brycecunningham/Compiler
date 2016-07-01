@@ -1,7 +1,6 @@
 import java.io.*;
 import java.util.*;
 
-// Project 8 CodeWriter
 
 public class CodeWriter {
 
@@ -9,8 +8,6 @@ public class CodeWriter {
 	private String currfile;
 	private int jumpflag = 1;		// append flag to jump labels to distinguish between each set of assembly commands
 	private int retaddflag = 1;		// same for return address labels
-	//private List<String> functions = new ArrayList<String>();	// keep track of which function name we're on for label naming
-	//private int funcindex = 0;
 
 	public CodeWriter(File outputfile) throws IOException {
 
@@ -177,6 +174,7 @@ public class CodeWriter {
 	}
 
 	public void writeInit() throws IOException {
+		
 		bw.write(	"@256\n" +
 					"D=A\n" +
 					"@SP\n" +
@@ -185,34 +183,18 @@ public class CodeWriter {
 	}
 
 	public void writeLabel(String label) throws IOException {
-		/*if (funcindex != 0) {
-			bw.write("(" + functions.get(funcindex-1) + "$" + label + ")\n");
-		} else {
-			bw.write("(" + label + ")\n");
-		}*/
+		
 		bw.write("(" + label + ")\n");
 	}
 
 	public void writeGoto(String label) throws IOException {
-		/*String templabel;
-		if (funcindex !=0) {
-			templabel = functions.get(funcindex-1) + "$" + label;
-		} else {
-			templabel = label;
-		}*/
 		
 		bw.write(	"@" + label + "\n" +
 					"0;JMP\n");
 	}
 
 	public void writeIf(String label) throws IOException {
-		/*String templabel;
-		if (funcindex !=0) {
-			templabel = functions.get(funcindex-1) + "$" + label;
-		} else {
-			templabel = label;
-		}	*/	
-
+		
 		bw.write(	"@SP\n" +			// pop top element off stack
 					"AM=M-1\n" +
 					"D=M\n" +
@@ -252,9 +234,6 @@ public class CodeWriter {
 	}
 
 	public void writeFunction(String functionName, int numLocals) throws IOException {
-		
-		//functions.add(functionName);
-		//funcindex++;
 
 		bw.write("(" + functionName + ")\n");
 
@@ -306,7 +285,7 @@ public class CodeWriter {
 					"@R12\n" +
 					"A=M\n" +
 					"0;JMP\n");		// goto RET (return address stored in R6)
-		//funcindex--;
+
 	}
 
 	// helper functions for pushing and popping
