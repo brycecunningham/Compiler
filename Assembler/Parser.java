@@ -47,7 +47,7 @@ public class Parser {
 	public String comp() {
 		int leftlimit = currCommand.indexOf('=');
 		int rightlimit = currCommand.indexOf(';');
-		if ((leftlimit == -1) && (rightlimit == -1)) {		// a command like -1 where there's no '=' or ';'. (Not sure if this would ever happen)
+		if ((leftlimit == -1) && (rightlimit == -1)) {		// a command like -1 where there's no '=' or ';'
 			return currCommand;
 		} else if (leftlimit == -1) {						// a command like D;JGT where there's no '=' but there is a ';'
 			return currCommand.substring(0,rightlimit);
