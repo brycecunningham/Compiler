@@ -1,6 +1,5 @@
 import java.io.*;
 
-// Project 8 Parser
 
 public class Parser {
 
@@ -16,13 +15,10 @@ public class Parser {
 
 	public boolean hasMoreCommands() throws IOException {
 		
-		// I combined the comment and blank line parsing code with hasMoreCommands and reading each input line
-
 		while ((currCommand = br.readLine()) != null) {
 			if (currCommand.contains("//"))
                 currCommand = currCommand.substring(0, currCommand.indexOf("//"));
             currCommand = currCommand.trim();
-            //currCommand = currCommand.replaceAll("\t", " ");	// get rid of tabs in the input
             if (currCommand.length() != 0)
             	break;
         }
