@@ -1,23 +1,5 @@
 import java.io.*;
 
-// **** NEW NOTE: I finally figured out the problem with switching from a File Reader to a
-// **** String Reader: the ready() method I was using in my hasMoreCommands() method wasn't
-// **** working the same way it was for files, that is, it was returning true even when
-// **** the getLine() method was null. To fix it, I streamlined. No more advance(). Instead
-// **** I combined checking for more commands and reading each line in the hasMoreCommands()
-// **** method. 
-
-
-
-
-// **** My assembler worked fine before I added the strip white space section at the beginning.
-// **** Before I added it I ran files through the separate project 0 program, then used the output
-// **** of that as the input here. Once I added the white space code here I attempted to change
-// **** the code to write to a string writer, and then wrap a string reader in the parser.
-// **** Looks like I'm getting null pointer exceptions when I run it now. I'll keep working on it
-// **** and if I figure it out I'll submit the fixed version ASAP. Thanks.
-
-
 
 public class Assembler {
 
@@ -26,7 +8,7 @@ public class Assembler {
 		String inputFilename = args[0];
 
 		
-		// strip white space code from project 0
+		// strip white space
 
 		BufferedReader br = new BufferedReader(new FileReader(inputFilename));
         StringWriter sw = new StringWriter();
@@ -51,15 +33,12 @@ public class Assembler {
         br.close();
         bw.close();
 
-        //System.out.println(tempfile);
-
-
+        
 
 		String filenamePrefix = inputFilename.substring(0, inputFilename.length() - 3); 	// input files are *.asm
 		String outputFilename = filenamePrefix + "hack"; 
 		BufferedWriter outputwriter = new BufferedWriter(new FileWriter(outputFilename));
 
-		//System.out.println(tempfile);
 		Parser p = new Parser(tempfile);
 		Code c = new Code();
 		SymbolTable symtable = new SymbolTable();
@@ -70,8 +49,6 @@ public class Assembler {
 		int romcount = 0;
 		
 		while (p.hasMoreCommands()) {
-			//p.advance();
-			//System.out.println(p.commandType());
 			if (p.commandType() == Parser.Command.L_COMMAND) {
 				String lsym = p.symbol();
 				if (!symtable.contains(lsym))
@@ -82,7 +59,7 @@ public class Assembler {
 		}
 		p.close();
 		
-		p = new Parser(tempfile);							// files are small enough that creating new Parser (and buffered reader) is fine
+		p = new Parser(tempfile);	
 
 		
 		// second pass to parse commands and deal with variables
@@ -90,7 +67,6 @@ public class Assembler {
 		int currRAM = 16;
 
 		while (p.hasMoreCommands()) {
-			//p.advance();
 			String symstring = p.symbol();
 			Parser.Command currcommand = p.commandType();			
 			
