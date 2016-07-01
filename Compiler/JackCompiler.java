@@ -11,14 +11,14 @@ public class JackCompiler {
 		File outputfileT;
 
 		
-		// source is either a directory of files
+		// source is either a directory of .jack files...
 		if (source.isDirectory()) {
 			for (File f : source.listFiles())
 				if (f.getName().endsWith(".jack")) {
 					inputfiles.add(f);
 				}
 		
-		// or a .jack file
+		// ...or one .jack file
 		} else {	
 			inputfiles.add(source);
 		}
